@@ -1,0 +1,207 @@
+@import url("https://api.fontshare.com/v2/css?f[]=work-sans@300,301,400,500,700,900&f[]=chillax@300,400,500,600&f[]=pencerio@50&f[]=alpino@300,400,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --theme: #e3ff04;
+}
+
+
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+h1,
+h4,
+h6,
+a,
+button,
+li,
+span {
+  font-family: "Work Sans", sans-serif;
+}
+
+p {
+  font-family: "Alpino", sans-serif;
+  font-size: 1.25rem;
+}
+
+.menubar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgb(51, 51, 51);
+  padding-top: 100px;
+  transform: translateX(-100%);
+  will-change: transform;
+  z-index: 100;
+}
+
+.menubar li {
+  color: #fff;
+  display: block;
+  transform-origin: -20px 50%;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0;
+  text-transform: uppercase;
+  will-change: transform, opacity, filter;
+}
+
+.menubar button {
+  color: #463;
+  font-weight: bold;
+  transform-origin: -20px 50%;
+  will-change: transform, opacity, filter;
+}
+.menubar ul {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 1rem;
+}
+
+.parallax {
+  overflow: hidden;
+  letter-spacing: -2px;
+  line-height: 0.8;
+  margin: 0;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.parallax .scroller {
+  font-weight: 600;
+  text-transform: capitalize;
+  font-size: 2rem;
+  display: flex;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.parallax span {
+  /* display: block; */
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0.5rem;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+
+
+.buttonwhite {
+  color: black;
+  border-radius: 10em;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 1em 2em;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid black;
+  transform: translateY(-4px) translateX(-2px);
+  box-shadow: 2px 5px 0 0 rgb(0, 0, 0);
+}
+
+.buttonwhite:hover {
+  transform: translateY(-4px) translateX(-2px);
+  box-shadow: 2px 5px 0 0 rgb(0, 0, 0);
+}
+
+.buttonwhite:active {
+  transform: translateY(2px) translateX(1px);
+  box-shadow: 0 0 0 0 black;
+}
+
+.preloader-wrapper {
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+  z-index: 99999999 !important;
+  position: fixed;
+  overflow: hidden;
+  inset: 0;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.cta {
+  position: relative;
+  margin: auto;
+  padding: 12px 18px;
+  transition: all 0.2s ease;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.cta:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 50px;
+  background: #9541c6;
+  width: 45px;
+  height: 45px;
+  transition: all 0.3s ease;
+}
+
+.cta span {
+  position: relative;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #fff;
+}
+
+.cta svg {
+  position: relative;
+  top: 0;
+  margin-left: 10px;
+  fill: none;
+  strokelinecap: round;
+  strokeLinejoin: round;
+  stroke: #9541c6;
+  stroke-width: 2;
+  transform: translateX(-5px);
+  transition: all 0.3s ease;
+}
+
+.cta:hover:before {
+  width: 100%;
+  background: #9541c6;
+}
+
+.cta:hover svg {
+  transform: translateX(0);
+}
+
+.cta:active {
+  transform: scale(0.95);
+}
+
+@keyframes dscroll {
+  100% {
+    transform: translateY(100vh);
+  }
+}
