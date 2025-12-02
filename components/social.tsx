@@ -29,7 +29,7 @@ const Social = () => {
       </a>
 
       <a
-        href="https://wa.link/1cc755"
+        href="https://wa.link/lahgc2"
         className="socialContainer containerFour"
       >
         <svg className="socialSvg whatsappSvg" viewBox="0 0 16 16">
