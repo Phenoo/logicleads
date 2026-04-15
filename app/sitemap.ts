@@ -35,7 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
       },
       {
-        url: `https://www.logicleads.tech/projects`,
+        url: `https://www.logicleads.tech/portfolio`,
         lastModified: new Date(),
         changeFrequency: "monthly",
         priority: 0.8,
@@ -51,6 +51,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: new Date(),
         changeFrequency: "weekly",
         priority: 1,
+      },
+      {
+        url: `https://www.logicleads.tech/business-websites`,
+        lastModified: new Date(),
+        changeFrequency: "weekly",
+        priority: 0.9,
+      },
+      {
+        url: `https://www.logicleads.tech/privacy-policy`,
+        lastModified: new Date(),
+        changeFrequency: "yearly",
+        priority: 0.4,
+      },
+      {
+        url: `https://www.logicleads.tech/terms-and-conditions`,
+        lastModified: new Date(),
+        changeFrequency: "yearly",
+        priority: 0.4,
       },
       ...postEntries,
     ];

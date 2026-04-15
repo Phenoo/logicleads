@@ -1,6 +1,4 @@
-import AOS from "aos";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 
 import "../globals.css";
 import "../styles/globals.scss";
@@ -10,6 +8,8 @@ import Navigation from "../../components/navigation/navigation";
 import SmoothScrolling from "../../utils/smooth-scrolling";
 import TextSLider1 from "../../components/textslide";
 import { BalancerProvider } from "../providers/provider";
+import MarketingAttributionTracker from "../../components/marketing/marketing-attribution-tracker";
+import MetaPixel from "../../components/marketing/meta-pixel";
 
 export const metadata: Metadata = {
   title: {
@@ -76,15 +76,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // useEffect(() => {
-  //   AOS.init();
-  // }, []);
   return (
     <html lang="en">
       <body>
         {/* <Preloader /> */}
 
         <BalancerProvider>
+          <MarketingAttributionTracker />
+          <MetaPixel />
           <SmoothScrolling>
             <Navigation />
             <main className="pt-24">{children}</main>

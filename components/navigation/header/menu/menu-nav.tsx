@@ -1,16 +1,9 @@
 import "./menu.scss";
 import { useContext } from "react";
-import { useLenis } from "@studio-freight/react-lenis";
 import { NavigationContext } from "../../navigation";
 import Link from "next/link";
 
-import {
-  FaFacebook,
-  FaInstagram,
-  FaLinkedin,
-  FaTwitter,
-  FaYinYang,
-} from "react-icons/fa6";
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa6";
 import { Mail } from "lucide-react";
 
 type NavItemProps = {
@@ -20,17 +13,9 @@ type NavItemProps = {
   soon: boolean;
 };
 
-const ITEMS_OLD = [
-  { name: "Home", href: "#", soon: false },
-  { name: "Alpha", href: "#", soon: true },
-  { name: "Eta", href: "#", soon: true },
-  { name: "Theta", href: "#", soon: true },
-  { name: "Order now", href: "#", soon: true },
-  { name: "Partnership", href: "#", soon: true },
-];
-
 const ITEMS = [
   { name: "Home", href: "/", soon: false },
+  { name: "Website Quote", href: "/business-websites", soon: false },
   { name: "About us", href: "/about", soon: false },
   { name: "Projects", href: "/portfolio", soon: false },
   { name: "Services", href: "/services", soon: false },
@@ -39,14 +24,10 @@ const ITEMS = [
 ];
 
 function MenuNavItem({ index, name, href, soon }: NavItemProps) {
-  const lenis = useLenis();
   const { setIsMenuOpened } = useContext(NavigationContext);
 
-  const handleClick = (event: React.MouseEvent) => {
-    event.preventDefault();
+  const handleClick = () => {
     setIsMenuOpened(false);
-    // lenis.isStopped = false;
-    // lenis.scrollTo(href, { offset: 100 });
   };
 
   return (

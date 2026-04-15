@@ -11,6 +11,7 @@ import {
   Text,
 } from "@react-email/components";
 import { Tailwind } from "@react-email/tailwind";
+import type { MarketingAttribution } from "../lib/marketing";
 
 type ContactFormEmailProps = {
   message: string;
@@ -18,6 +19,7 @@ type ContactFormEmailProps = {
   firstName: string;
   phoneNumber: string;
   subject: string;
+  attribution?: MarketingAttribution;
 };
 
 export default function ContactFormEmail({
@@ -26,7 +28,12 @@ export default function ContactFormEmail({
   firstName,
   phoneNumber,
   subject,
+  attribution,
 }: ContactFormEmailProps) {
+  const attributionEntries = Object.entries(attribution || {}).filter(
+    ([, value]) => Boolean(value)
+  );
+
   return (
     <Html>
       <Head />
@@ -45,6 +52,17 @@ export default function ContactFormEmail({
               <Text>The sender&apos;s subject is: {subject}</Text>
 
               <Text>The sender&apos;s phone number is: {phoneNumber}</Text>
+              {attributionEntries.length > 0 ? (
+                <>
+                  <Hr />
+                  <Text className="font-semibold">Attribution:</Text>
+                  {attributionEntries.map(([key, value]) => (
+                    <Text key={key}>
+                      {key}: {value}
+                    </Text>
+                  ))}
+                </>
+              ) : null}
             </Section>
           </Container>
         </Body>

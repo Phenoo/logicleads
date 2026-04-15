@@ -1,11 +1,11 @@
 import React from "react";
 import {
-  Html,
   Body,
+  Container,
   Head,
   Heading,
   Hr,
-  Container,
+  Html,
   Preview,
   Section,
   Text,
@@ -13,25 +13,23 @@ import {
 import { Tailwind } from "@react-email/tailwind";
 import type { MarketingAttribution } from "../lib/marketing";
 
-type ProjectFormEmailProps = {
+type AdLeadEmailProps = {
   name: string;
-  projectDescription: string;
-  budget: string;
-  email: string;
-  phoneNumber: string;
+  businessType: string;
+  budgetBand: string;
   timeline: string;
+  phoneNumber: string;
   attribution?: MarketingAttribution;
 };
 
-export default function ProjectFormEmail({
+export default function AdLeadEmail({
   name,
-  projectDescription,
-  budget,
-  email,
-  phoneNumber,
+  businessType,
+  budgetBand,
   timeline,
+  phoneNumber,
   attribution,
-}: ProjectFormEmailProps) {
+}: AdLeadEmailProps) {
   const attributionEntries = Object.entries(attribution || {}).filter(
     ([, value]) => Boolean(value)
   );
@@ -39,32 +37,30 @@ export default function ProjectFormEmail({
   return (
     <Html>
       <Head />
-      <Preview>New project submission from your site</Preview>
+      <Preview>New website quote lead from the landing page</Preview>
       <Tailwind>
         <Body className="bg-gray-100 text-black">
           <Container>
-            <Section className="bg-white borderBlack my-10 px-10 py-4 rounded-md">
+            <Section className="my-10 rounded-md bg-white px-10 py-4">
               <Heading className="leading-tight">
-                You received a new project submission
+                You received a new website quote lead
               </Heading>
               <Hr />
               <Text className="font-semibold">Name:</Text>
               <Text>{name}</Text>
-              
-              <Text className="font-semibold">Project Description:</Text>
-              <Text>{projectDescription}</Text>
-              
-              <Text className="font-semibold">Budget:</Text>
-              <Text>{budget}</Text>
-              
-              <Text className="font-semibold">Email:</Text>
-              <Text>{email}</Text>
-              
-              <Text className="font-semibold">Phone Number:</Text>
-              <Text>{phoneNumber}</Text>
-              
+
+              <Text className="font-semibold">Business Type:</Text>
+              <Text>{businessType}</Text>
+
+              <Text className="font-semibold">Budget Band:</Text>
+              <Text>{budgetBand}</Text>
+
               <Text className="font-semibold">Timeline:</Text>
               <Text>{timeline}</Text>
+
+              <Text className="font-semibold">Phone / WhatsApp:</Text>
+              <Text>{phoneNumber}</Text>
+
               {attributionEntries.length > 0 ? (
                 <>
                   <Hr />

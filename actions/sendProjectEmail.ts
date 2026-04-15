@@ -4,16 +4,23 @@ import React from "react";
 import { Resend } from "resend";
 import { validateString, getErrorMessage } from "../lib/utils";
 import ProjectFormEmail from "../email/project-form-email";
+import {
+  extractMarketingAttribution,
+  getStringValue,
+} from "../lib/marketing";
+import { sendMetaLeadEvent } from "../lib/meta";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendProjectEmail = async (formData: FormData) => {
-  const name = formData.get("name");
-  const projectDescription = formData.get("projectDescription");
-  const budget = formData.get("budget");
-  const email = formData.get("email");
-  const phoneNumber = formData.get("phoneNumber");
-  const timeline = formData.get("timeline");
+  const name = getStringValue(formData.get("name"));
+  const projectDescription = getStringValue(formData.get("projectDescription"));
+  const budget = getStringValue(formData.get("budget"));
+  const email = getStringValue(formData.get("email"));
+  const phoneNumber = getStringValue(formData.get("phoneNumber"));
+  const timeline = getStringValue(formData.get("timeline"));
+  const eventId = getStringValue(formData.get("event_id"));
+  const attribution = extractMarketingAttribution(formData);
 
   // simple server-side validation
   if (!validateString(name, 500)) {
@@ -61,6 +68,7 @@ export const sendProjectEmail = async (formData: FormData) => {
         email: email,
         phoneNumber: phoneNumber,
         timeline: timeline,
+        attribution,
       }),
     });
   } catch (error: unknown) {
@@ -69,8 +77,28 @@ export const sendProjectEmail = async (formData: FormData) => {
     };
   }
 
+  try {
+    await sendMetaLeadEvent({
+      eventId,
+      sourceUrl: attribution.source_url,
+      userData: {
+        email,
+        firstName: name,
+        phone: phoneNumber,
+        fbclid: attribution.fbclid,
+      },
+      customData: {
+        content_name: "Project Form",
+        lead_source: "project_form",
+        budget_band: budget,
+        page_context: attribution.page_context,
+      },
+    });
+  } catch (error) {
+    console.error("Meta project lead tracking failed:", error);
+  }
+
   return {
     data,
   };
 };
-
