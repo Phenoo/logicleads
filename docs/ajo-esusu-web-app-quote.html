@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote - Ajo/Esusu Web App MVP</title>
+    <style>
+      :root {
+        --ink: #15111c;
+        --muted: #686071;
+        --brand: #a42dff;
+        --brand-dark: #3a075c;
+        --paper: #ffffff;
+        --soft: #f7f2fb;
+        --line: #e7dff0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #efedf3;
+        color: var(--ink);
+        font-family:
+          "Inter",
+          "Segoe UI",
+          Arial,
+          sans-serif;
+        line-height: 1.5;
+      }
+
+      .page {
+        width: min(900px, 100%);
+        margin: 32px auto;
+        background: var(--paper);
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow: 0 24px 80px rgba(21, 17, 28, 0.12);
+      }
+
+      .hero {
+        padding: 42px 48px;
+        background:
+          radial-gradient(circle at 88% 12%, rgba(164, 45, 255, 0.24), transparent 34%),
+          linear-gradient(135deg, #fff 0%, #faf7ff 58%, #f2e7ff 100%);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .logo {
+        width: 92px;
+        height: auto;
+      }
+
+      .tag {
+        padding: 8px 14px;
+        border: 1px solid rgba(164, 45, 255, 0.2);
+        border-radius: 999px;
+        color: var(--brand-dark);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        max-width: 720px;
+        margin-top: 42px;
+        font-size: 46px;
+        line-height: 1.04;
+        letter-spacing: -0.04em;
+      }
+
+      .subtitle {
+        max-width: 650px;
+        margin-top: 16px;
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .meta {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-top: 34px;
+      }
+
+      .meta-card {
+        padding: 18px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+      }
+
+      .label {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .value {
+        margin-top: 6px;
+        font-size: 18px;
+        font-weight: 800;
+      }
+
+      .content {
+        padding: 42px 48px 48px;
+      }
+
+      .section {
+        padding: 28px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .section:first-child {
+        padding-top: 0;
+      }
+
+      .section:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      h2 {
+        margin-bottom: 14px;
+        font-size: 22px;
+        letter-spacing: -0.02em;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .item {
+        padding: 14px 16px;
+        background: var(--soft);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        color: #33263d;
+        font-size: 15px;
+      }
+
+      .pricing {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      .price-card {
+        padding: 28px;
+        background: var(--ink);
+        border-radius: 22px;
+        color: #fff;
+      }
+
+      .price {
+        margin-top: 8px;
+        color: #d9ff5a;
+        font-size: 40px;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+      }
+
+      .note {
+        margin-top: 8px;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 14px;
+      }
+
+      .terms {
+        padding: 24px;
+        background: #fbf9fd;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      li {
+        margin: 7px 0;
+        color: #3a3242;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      @media print {
+        body {
+          background: #fff;
+        }
+
+        .page {
+          margin: 0;
+          border-radius: 0;
+          box-shadow: none;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .hero,
+        .content {
+          padding: 30px 22px;
+        }
+
+        h1 {
+          font-size: 34px;
+        }
+
+        .meta,
+        .grid,
+        .pricing {
+          grid-template-columns: 1fr;
+        }
+
+        .footer {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <div class="topbar">
+          <img
+            src="assets/logic-leads-logo.png"
+            alt="Logic Leads logo"
+            class="logo"
+          />
+          <span class="tag">Project Quote</span>
+        </div>
+
+        <h1>Ajo/Esusu Contribution Web App MVP</h1>
+        <p class="subtitle">
+          A simple first version for users to create or join thrift groups,
+          track contributions, manage profiles, and contact support.
+        </p>
+
+        <div class="meta">
+          <div class="meta-card">
+            <p class="label">Prepared By</p>
+            <p class="value">Logic Leads</p>
+          </div>
+          <div class="meta-card">
+            <p class="label">Date</p>
+            <p class="value">21 April 2026</p>
+          </div>
+          <div class="meta-card">
+            <p class="label">Timeline</p>
+            <p class="value">3-5 Weeks</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content">
+        <div class="section">
+          <h2>Scope</h2>
+          <div class="grid">
+            <div class="item">Dashboard / home overview</div>
+            <div class="item">User registration and login</div>
+            <div class="item">Create thrift / join thrift</div>
+            <div class="item">Wallet and contribution ledger</div>
+            <div class="item">Payments / contributions integration</div>
+            <div class="item">User profile</div>
+            <div class="item">Admin dashboard</div>
+            <div class="item">Support / chat handoff</div>
+            <div class="item">Domain setup and deployment</div>
+            <div class="item">Basic notifications</div>
+          </div>
+        </div>
+
+        <div class="section pricing">
+          <div class="price-card" style="grid-column: 1 / -1">
+            <p class="label">Estimated Investment</p>
+            <p class="price">₦2,500,000</p>
+            <p class="note">
+              Covers product design, frontend development, and backend
+              development for the MVP.
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Next Step</h2>
+          <p>
+            Confirm the MVP scope, payment flow, and admin requirements. Once
+            confirmed, we will prepare the project brief and kickoff schedule.
+          </p>
+        </div>
+
+        <div class="footer">
+          <span>Logic Leads</span>
+          <span>bylogicleads@gmail.com</span>
+          <span>+234 703 517 2208</span>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

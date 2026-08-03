@@ -62,11 +62,7 @@ const Abouthome = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-8">
-              <div className="delafield text-black text-3xl">
-                <h5>Desco4PF</h5>
-              </div>
-            </div>
+         
           </div>
         </div>
       </div>

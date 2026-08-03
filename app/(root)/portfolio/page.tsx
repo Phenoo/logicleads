@@ -36,7 +36,33 @@ const fetchPosts = async () => {
 };
 
 const Page = async () => {
-  const posts = await fetchPosts();
+  let posts = await fetchPosts() || [];
+
+  const externalProjects = [
+    {
+      title: "Pent Fitness",
+      category: "Fitness & Wellness",
+      mainImage: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=500",
+      url: "https://www.pentfitness.com/",
+      slug: { current: "pent-fitness" }
+    },
+    {
+      title: "Quebits",
+      category: "Website Design",
+      mainImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=500",
+      url: "https://www.quebits.ca/",
+      slug: { current: "quebits" }
+    },
+    {
+      title: "Demuzs Cuts",
+      category: "Barbershop & Grooming",
+      mainImage: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=500",
+      url: "https://demuzscuts.online/",
+      slug: { current: "demuzscuts" }
+    }
+  ];
+
+  posts = [...externalProjects, ...posts];
 
   return (
     <div>

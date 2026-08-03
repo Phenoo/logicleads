@@ -66,10 +66,6 @@ const Abouthome = () => {
             <Link href={"/about"} className="w-fit">
               <button className="button bg-primary">Learn More</button>
             </Link>
-
-            <div className="delafield text-white text-3xl">
-              <h5>Desco4PF</h5>
-            </div>
           </div>
         </div>
       </div>

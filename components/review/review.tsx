@@ -36,7 +36,7 @@ const Review = ({ posts }: any) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
           {items.map((item: any, i: any) => {
             return (
-              <Link key={i} href={`/portfolio/${item?.slug.current}`}>
+              <Link key={i} href={item?.url || `/portfolio/${item?.slug?.current || ''}`} target={item?.url ? "_blank" : "_self"}>
                 <div className="flex flex-col transition-all hover:scale-95 cursor-pointer gap-4 group project">
                   <div>
                     <Image
