@@ -6,7 +6,7 @@ import { TbRosetteDiscountCheckFilled } from "react-icons/tb";
 
 const Abouthome = () => {
   const phrase =
-    "we are a full-service digital agency dedicated to transforming your ideas into impactful digital experiences. Our passion for technology and commitment to excellence drives us to deliver solutions that not only meet but exceed your expectations.";
+    "We are a full-service digital agency dedicated to transforming your ideas into impactful digital experiences. Our passion for technology and commitment to excellence drives us to deliver solutions that not only meet but exceed your expectations.";
   return (
     <div className="max-w-7xl mx-auto p-4 flex justify-center items-center flex-col min-h-screen">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
