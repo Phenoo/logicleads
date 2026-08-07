@@ -8,6 +8,12 @@ import Link from "next/link";
 import AttributionFields from "../marketing/attribution-fields";
 import WhatsAppCta from "../marketing/whatsapp-cta";
 import { trackLead } from "../../lib/meta-browser";
+import {
+  BUSINESS_LOCATION_LABEL,
+  PHONE_LINK,
+  SUPPORT_EMAIL,
+  WHATSAPP_NUMBER_DISPLAY,
+} from "../../lib/site";
 
 const Contact = () => {
   const [eventId, setEventId] = React.useState(() => crypto.randomUUID());
@@ -134,7 +140,13 @@ const Contact = () => {
                   />
                 </div>
                 <div>
-                  <input type="text" placeholder="Last Name *" />
+                  <input
+                    type="text"
+                    placeholder="Last Name *"
+                    name="lastName"
+                    required
+                    maxLength={500}
+                  />
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
@@ -149,7 +161,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <input
-                    placeholder="Phone Number *"
+                    placeholder="WhatsApp or Phone Number *"
                     name="phoneNumber"
                     type="tel"
                     required
@@ -196,17 +208,31 @@ const Contact = () => {
             </div>
             <div className=" md:col-span-4 bg-primary rounded-xl p-4 flex flex-col justify-between gap-4">
               <div className="flex flex-col gap-2">
-                <h4 className="text-xl md:text-2xl font-medium">Address</h4>
-                <p>4512 Victory Estate, Enugu State.</p>
+                <h4 className="text-xl md:text-2xl font-medium">Location</h4>
+                <p>{BUSINESS_LOCATION_LABEL}</p>
+                <p>Serving businesses across the UK and remotely.</p>
               </div>
               <div className="flex flex-col gap-2">
                 <h4 className="text-xl md:text-2xl font-medium">Contact</h4>
-                <p>Phone: +2347035172208</p>
-                <p>Email: bylogicleads@gmail.com</p>
+                <p>
+                  Phone / WhatsApp:{" "}
+                  <a href={PHONE_LINK} className="underline underline-offset-4">
+                    {WHATSAPP_NUMBER_DISPLAY}
+                  </a>
+                </p>
+                <p>
+                  Email:{" "}
+                  <a
+                    href={`mailto:${SUPPORT_EMAIL}`}
+                    className="underline underline-offset-4"
+                  >
+                    {SUPPORT_EMAIL}
+                  </a>
+                </p>
               </div>
               <div className="flex flex-col gap-2">
-                <h4 className="text-xl md:text-2xl font-medium">Open Time</h4>
-                <p>We operate 24/7.</p>
+                <h4 className="text-xl md:text-2xl font-medium">Response Time</h4>
+                <p>We aim to reply within one business day.</p>
               </div>
               <div className="flex flex-col gap-1">
                 <h4 className="text-xl md:text-2xl font-medium">

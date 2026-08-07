@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import AttributionFields from "../marketing/attribution-fields";
 import WhatsAppCta from "../marketing/whatsapp-cta";
 import { trackLead } from "../../lib/meta-browser";
+import { PHONE_LINK, SUPPORT_EMAIL, WHATSAPP_NUMBER_DISPLAY } from "../../lib/site";
 
 const ProjectForm = () => {
   const [eventId, setEventId] = React.useState(() => crypto.randomUUID());
@@ -210,7 +211,7 @@ const ProjectForm = () => {
               </label>
               <input
                 id="phoneNumber"
-                placeholder="+1 (555) 000-0000"
+                placeholder="+44 7380 188114"
                 name="phoneNumber"
                 type="tel"
                 className="px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-primary focus:outline-none transition-colors bg-white"
@@ -314,17 +315,17 @@ const ProjectForm = () => {
           <p className="text-base">
             Questions? Contact us directly at{" "}
             <a
-              href="mailto:bylogicleads@gmail.com"
+              href={`mailto:${SUPPORT_EMAIL}`}
               className="text-primary hover:underline font-semibold"
             >
-              bylogicleads@gmail.com
+              {SUPPORT_EMAIL}
             </a>{" "}
             or call{" "}
             <a
-              href="tel:+2347035172208"
+              href={PHONE_LINK}
               className="text-primary hover:underline font-semibold"
             >
-              +234 703 517 2208
+              {WHATSAPP_NUMBER_DISPLAY}
             </a>
           </p>
         </div>

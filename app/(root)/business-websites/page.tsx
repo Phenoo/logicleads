@@ -6,6 +6,13 @@ import { client } from "../../../sanity/lib/client";
 import WebsiteQuoteForm from "../../../components/ads/website-quote-form";
 import WhatsAppCta from "../../../components/marketing/whatsapp-cta";
 import ViewContentTracker from "../../../components/marketing/view-content-tracker";
+import {
+  BUSINESS_LOCATION_LABEL,
+  DEFAULT_BUDGET_BAND_DISPLAY,
+  DEFAULT_TIMELINE,
+  SITE_URL,
+  WHATSAPP_NUMBER_DISPLAY,
+} from "../../../lib/site";
 
 const query = groq`
   *[_type=="project"] {
@@ -33,7 +40,7 @@ const faqItems = [
   {
     question: "How long does delivery take?",
     answer:
-      "Most qualified projects in this offer are positioned for a 14-21 day turnaround once scope, content, and approvals are aligned.",
+      "Most qualified projects in this offer are positioned for a 2-4 week turnaround once scope, content, and approvals are aligned.",
   },
   {
     question: "What happens after I enquire?",
@@ -45,7 +52,10 @@ const faqItems = [
 export const metadata: Metadata = {
   title: "High-Converting Business Websites",
   description:
-    "Get a conversion-focused website for your business in 14-21 days. Built for trust, enquiries, and sales.",
+    "Get a conversion-focused business website from a UK-based digital agency. Built for trust, enquiries, and sales.",
+  alternates: {
+    canonical: `${SITE_URL}/business-websites`,
+  },
 };
 
 async function fetchProjects() {
@@ -72,20 +82,20 @@ export default async function BusinessWebsitesPage() {
         <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-28">
           <div className="text-white">
             <p className="inline-flex items-center rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.28em] text-[#d1ff57]">
-              Nigeria-first website offer
+              UK website growth partner
             </p>
             <h1 className="mt-8 max-w-4xl text-5xl font-semibold leading-[1.02] md:text-6xl lg:text-7xl">
-              Get a high-converting business website in 14-21 days.
+              Get a high-converting business website built to win better leads.
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-white/78 md:text-xl">
-              Built for SMEs that need a stronger online presence, clearer
-              credibility, and more qualified leads without wasting budget on a
-              generic website.
+              Built for service businesses and growth-minded brands that need a
+              stronger online presence, clearer credibility, and a cleaner path
+              from visit to enquiry.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
               {[
-                "Starting from ₦500k",
+                BUSINESS_LOCATION_LABEL,
                 "WhatsApp-first qualification",
                 "Built for trust and enquiries",
               ].map((item) => (
@@ -101,8 +111,8 @@ export default async function BusinessWebsitesPage() {
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <WhatsAppCta
                 entryPoint="Business websites hero CTA"
-                budgetBand="₦500k - ₦1.5m"
-                timeline="14-21 days"
+                budgetBand={DEFAULT_BUDGET_BAND_DISPLAY}
+                timeline={DEFAULT_TIMELINE}
                 needs="New website or redesign"
                 goal="A conversion-focused business website for more leads and sales"
                 className="inline-flex items-center justify-center rounded-full bg-[#d1ff57] px-8 py-4 text-base font-semibold text-black transition hover:bg-white"
@@ -126,9 +136,9 @@ export default async function BusinessWebsitesPage() {
               </div>
               <div className="rounded-[1.75rem] border border-white/10 bg-white/6 p-5">
                 <p className="text-sm uppercase tracking-[0.2em] text-white/45">
-                  Fit
+                  Contact
                 </p>
-                <p className="mt-3 text-xl font-semibold">SMEs and service brands</p>
+                <p className="mt-3 text-xl font-semibold">{WHATSAPP_NUMBER_DISPLAY}</p>
               </div>
               <div className="rounded-[1.75rem] border border-white/10 bg-white/6 p-5">
                 <p className="text-sm uppercase tracking-[0.2em] text-white/45">
@@ -152,7 +162,7 @@ export default async function BusinessWebsitesPage() {
                   "Strategy-led page structure that sells your offer clearly",
                   "Responsive design and fast lead capture experience",
                   "Conversion-first CTA placement and contact flow",
-                  "Delivery positioned for 14-21 days when scope is aligned",
+                  "Delivery positioned for 2-4 weeks when scope is aligned",
                 ].map((item) => (
                   <div
                     key={item}
@@ -164,12 +174,14 @@ export default async function BusinessWebsitesPage() {
               </div>
               <div className="mt-8 rounded-[1.5rem] border border-[#d1ff57]/30 bg-[#d1ff57]/10 p-5">
                 <p className="text-sm uppercase tracking-[0.2em] text-[#d1ff57]">
-                  Starting price
+                  Quote model
                 </p>
-                <p className="mt-3 text-4xl font-semibold">₦500k</p>
+                <p className="mt-3 text-3xl font-semibold">
+                  Tailored after scope review
+                </p>
                 <p className="mt-2 text-white/70">
-                  Best fit for businesses ready to invest properly in their web
-                  presence and lead generation.
+                  We quote after understanding your pages, messaging, and
+                  conversion requirements so the final scope is clear.
                 </p>
               </div>
             </div>
@@ -265,8 +277,8 @@ export default async function BusinessWebsitesPage() {
               <div className="mt-6 flex flex-col gap-4 sm:flex-row">
                 <WhatsAppCta
                   entryPoint="Founder block CTA"
-                  budgetBand="₦500k - ₦1.5m"
-                  timeline="14-21 days"
+                  budgetBand={DEFAULT_BUDGET_BAND_DISPLAY}
+                  timeline={DEFAULT_TIMELINE}
                   needs="Business website quote"
                   goal="A website that improves trust and lead generation"
                   className="inline-flex items-center justify-center rounded-full bg-primary px-7 py-4 text-base font-semibold text-white transition hover:bg-[#7b2ea9]"
@@ -311,13 +323,23 @@ export default async function BusinessWebsitesPage() {
                   href={`/portfolio/${project.slug.current}`}
                   className="group overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-lg shadow-black/5 transition hover:-translate-y-1"
                 >
-                  <div className="relative h-64 overflow-hidden">
-                    <Image
-                      src={project.mainImage}
-                      alt={project.title}
-                      fill
-                      className="object-cover transition duration-500 group-hover:scale-105"
-                    />
+                  <div className="relative h-64 overflow-hidden rounded-[2rem]">
+                    {project?.url ? (
+                      <iframe 
+                        src={project.url}
+                        className="w-full h-full border-0 pointer-events-none"
+                        title={project.title || "Project preview"}
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin"
+                      />
+                    ) : (
+                      <Image
+                        src={project.mainImage}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition duration-500 group-hover:scale-105"
+                      />
+                    )}
                   </div>
                   <div className="p-6">
                     <span className="inline-flex rounded-full bg-[#ece8f6] px-3 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
@@ -401,8 +423,8 @@ export default async function BusinessWebsitesPage() {
             </div>
             <WhatsAppCta
               entryPoint="Bottom CTA"
-              budgetBand="₦500k - ₦1.5m"
-              timeline="14-21 days"
+              budgetBand={DEFAULT_BUDGET_BAND_DISPLAY}
+              timeline={DEFAULT_TIMELINE}
               needs="Business website quote"
               goal="A focused website that helps my business convert better"
               className="mt-8 inline-flex items-center justify-center rounded-full bg-[#d1ff57] px-8 py-4 text-base font-semibold text-black transition hover:bg-white"

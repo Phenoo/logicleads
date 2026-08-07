@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa6";
 import { Mail } from "lucide-react";
+import { SUPPORT_EMAIL } from "../../../../lib/site";
 
 type NavItemProps = {
   index: number;
@@ -61,7 +62,7 @@ export default function MenuNav() {
       <div></div>
       <div className="mt-8 flex gap-4 items-center">
         <span className="p-4 border border-white cursor-pointer rounded-md  text-white transition-all">
-          <a href="mailto:bylogicleads@gmail.com">
+          <a href={`mailto:${SUPPORT_EMAIL}`}>
             <Mail color="white" className="text-white w-4 h-4" />
           </a>
         </span>

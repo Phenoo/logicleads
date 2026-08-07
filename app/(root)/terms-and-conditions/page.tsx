@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SUPPORT_EMAIL, WHATSAPP_NUMBER_DISPLAY } from "../../../lib/site";
 
 export const metadata: Metadata = {
   title: "Terms and Conditions",
@@ -35,8 +36,7 @@ const termsSections = [
   },
   {
     title: "Contact",
-    body:
-      "Questions about these terms can be sent to bylogicleads@gmail.com or discussed through our official WhatsApp and project channels.",
+    body: `Questions about these terms can be sent to ${SUPPORT_EMAIL} or discussed through our official WhatsApp channel at ${WHATSAPP_NUMBER_DISPLAY}.`,
   },
 ];
 

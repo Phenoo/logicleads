@@ -10,63 +10,48 @@ import TextSLider1 from "../../components/textslide";
 import { BalancerProvider } from "../providers/provider";
 import MarketingAttributionTracker from "../../components/marketing/marketing-attribution-tracker";
 import MetaPixel from "../../components/marketing/meta-pixel";
+import SiteSchema from "../../components/marketing/site-schema";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "../../lib/site";
 
 export const metadata: Metadata = {
   title: {
     template: "%s | Logic Leads",
-    default: "Logic Leads - Digital Agency", // a default is required when creating a template
+    default: "Logic Leads | UK Web Design & Digital Growth Agency",
   },
-  description:
-    "Your premier digital agency for Mobile App Development, Web Development, UI/UX Design, Graphic Design, Digital Marketing, and Copywriting.",
+  description: SITE_DESCRIPTION,
   keywords: [
     "Logic Leads",
-    "logic",
-    "logic leads",
-    "leads",
-    "llogics",
-    "Logicleads",
-    " Digital Agency",
+    "UK web design agency",
+    "digital agency UK",
     "Web Development",
     "Digital Marketing",
-    "SEO Services",
-    "Social Media Management",
-    "E-Commerce Solutions",
-    "Graphic Design",
-    "Online Marketing",
-    " Website Design",
-    "Internet Marketing",
-    "Branding Services",
-    "Content Marketing",
-    "Pay-Per-Click Advertising",
-    "Search Engine Optimization",
-    "Email Marketing",
-    "Web Design Company",
-    "Digital Strategy",
-    "Marketing Consulting",
     "UX/UI Design",
     "Mobile App Development",
-    "Custom Web Solutions",
-    "Creative Agency",
-    "Digital Transformation",
-    "Conversion Rate Optimization",
-    "Online Advertising",
-    "Web Analytics",
-    "Digital Advertising",
-    "Local SEO",
-    "Influencer Marketing",
+    "Website Design",
+    "Lead generation websites",
     "Responsive Web Design",
   ],
-  metadataBase: new URL("https://www.logicleads.tech/"),
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/",
-    languages: {
-      "en-US": "/en-US",
-      "de-DE": "/de-DE",
-    },
   },
   category: "technology",
   referrer: "origin-when-cross-origin",
   generator: "Next.js",
+  applicationName: SITE_NAME,
+  openGraph: {
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    locale: "en_GB",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export const revalidate = 0;
@@ -82,6 +67,7 @@ export default function RootLayout({
         {/* <Preloader /> */}
 
         <BalancerProvider>
+          <SiteSchema />
           <MarketingAttributionTracker />
           <MetaPixel />
           <SmoothScrolling>

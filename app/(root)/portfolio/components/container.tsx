@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { GiFastArrow } from "react-icons/gi";
+import { PORTFOLIO_FALLBACK_IMAGE } from "../../../../lib/site";
 
 const ProjectContainer = ({ items }: any) => {
   return (
@@ -20,24 +21,43 @@ const ProjectContainer = ({ items }: any) => {
               Our Recent
             </h4>
             <h4 className="text-primary text-3xl md:text-4xl lg:text-5xl font-medium capitalize">
-              Work Portfolio
+              Work Portfolsssio
             </h4>
           </div>
           <div></div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
           {items?.map((item: any, i: any) => {
+            const imageSrc = item?.mainImage || PORTFOLIO_FALLBACK_IMAGE;
+            const projectHref = item?.url || `/portfolio/${item?.slug?.current || ""}`;
+
             return (
-              <Link key={i} href={item?.url || `/portfolio/${item?.slug?.current || ''}`} target={item?.url ? "_blank" : "_self"}>
+              <Link
+                key={i}
+                href={projectHref}
+                target={item?.url ? "_blank" : "_self"}
+                rel={item?.url ? "noreferrer" : undefined}
+              >
                 <div className="flex flex-col transition-all hover:scale-95 cursor-pointer gap-4 group project">
-                  <div>
-                    <Image
-                      src={item?.mainImage}
-                      alt="project"
-                      width={500}
-                      height={400}
-                      className="rounded-3xl"
-                    />
+                  <div className="overflow-hidden rounded-3xl h-[280px]">
+                    {item?.url ? (
+                      <iframe 
+                        src={item.url}
+                        className="w-full h-full border-0 pointer-events-none rounded-3xl"
+                        title={item?.title || "Project preview"}
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin"
+                      />
+                    ) : (
+                      <Image
+                        src={imageSrc}
+                        alt={item?.title || "Project preview"}
+                        width={1200}
+                        height={900}
+                        sizes="(min-width: 1024px) 40vw, (min-width: 768px) 45vw, 100vw"
+                        className="h-full w-full rounded-3xl object-cover"
+                      />
+                    )}
                   </div>
                   <div className="">
                     <span className="border-x rounded-3xl border-x-black bg-primary text-white py-2 px-4 text-base">

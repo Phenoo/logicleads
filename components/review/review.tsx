@@ -6,7 +6,7 @@ import { GiFastArrow } from "react-icons/gi";
 import Link from "next/link";
 
 const Review = ({ posts }: any) => {
-  const items = posts.filter((_: any, i: number) => i < 3);
+  const items = posts.filter((_: any, i: number) => i < 4);
 
   return (
     <div className="bg-white py-20 flex flex-col justify-center text-black space-y-8">
@@ -38,14 +38,24 @@ const Review = ({ posts }: any) => {
             return (
               <Link key={i} href={item?.url || `/portfolio/${item?.slug?.current || ''}`} target={item?.url ? "_blank" : "_self"}>
                 <div className="flex flex-col transition-all hover:scale-95 cursor-pointer gap-4 group project">
-                  <div>
-                    <Image
-                      src={item?.mainImage}
-                      alt="project"
-                      width={500}
-                      height={400}
-                      className="rounded-3xl"
-                    />
+                  <div className="overflow-hidden rounded-3xl h-[400px]">
+                    {item?.url ? (
+                      <iframe 
+                        src={item.url}
+                        className="w-full h-full border-0 pointer-events-none rounded-3xl"
+                        title={item?.title || "Project preview"}
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin"
+                      />
+                    ) : (
+                      <Image
+                        src={item?.mainImage}
+                        alt="project"
+                        width={500}
+                        height={400}
+                        className="rounded-3xl h-full w-full object-cover"
+                      />
+                    )}
                   </div>
                   <div className="">
                     <span className="border-x rounded-3xl border-x-black bg-primary text-white py-2 px-4 text-base">

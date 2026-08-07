@@ -13,6 +13,7 @@ import {
 import { Metadata } from "next";
 import { Slash } from "lucide-react";
 import SlugContainer from "./components/SlugContainer";
+import { SITE_DESCRIPTION } from "../../../../lib/site";
 
 const fetchArticleData = async (slug: string) => {
   const result = await client.fetch(
@@ -38,8 +39,8 @@ export async function generateMetadata({
   // const post = await response.json();
 
   return {
-    title: post?.title,
-    description: post?.description,
+    title: post?.title || "Portfolio Project",
+    description: post?.description || SITE_DESCRIPTION,
   };
 }
 
@@ -62,22 +63,9 @@ type Props = {
 const Page = async ({ params }: Props) => {
   const data = await fetchArticleData(params.slug);
   const dataprojects = await getDataProjects();
-
-  function shuffle(array: any[]) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
-  // Original dataprojects array
-
-  // Shuffle the dataprojects array
-  const shuffledProjects = shuffle(dataprojects.slice());
-
-  // Select the first 4 elements from the shuffled array
-  const projects = shuffledProjects.slice(0, 4);
+  const projects = dataprojects
+    .filter((project: any) => project?.slug?.current !== params.slug)
+    .slice(0, 4);
 
   return (
     <div className="h-full w-full">
@@ -93,8 +81,8 @@ const Page = async ({ params }: Props) => {
               <Slash />
             </BreadcrumbSeparator>
             <BreadcrumbItem>
-              <BreadcrumbLink href="/projects" className=" text-xl">
-                Projects
+              <BreadcrumbLink href="/portfolio" className=" text-xl">
+                Portfolio
               </BreadcrumbLink>
             </BreadcrumbItem>
 
@@ -102,9 +90,9 @@ const Page = async ({ params }: Props) => {
               <Slash />
             </BreadcrumbSeparator>
             <BreadcrumbItem>
-              <BreadcrumbLink href="/contact" className="text-primary text-xl">
+              <BreadcrumbPage className="text-primary text-xl">
                 {data?.title}
-              </BreadcrumbLink>
+              </BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>

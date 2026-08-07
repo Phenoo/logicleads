@@ -1,4 +1,10 @@
-export const LOGICLEADS_WHATSAPP_NUMBER = "2347035172208";
+import {
+  DEFAULT_BUDGET_BAND,
+  DEFAULT_TIMELINE,
+  WHATSAPP_NUMBER_RAW,
+} from "./site";
+
+export const LOGICLEADS_WHATSAPP_NUMBER = WHATSAPP_NUMBER_RAW;
 
 export const MARKETING_FIELD_KEYS = [
   "utm_source",
@@ -87,8 +93,8 @@ export function buildWebsiteQuoteMessage({
     `Business type: ${businessType || "I will share in chat"}`,
     `Need: ${needs}`,
     `Goal: ${goal}`,
-    `Budget band: ${budgetBand || "₦500k - ₦1.5m"}`,
-    `Timeline: ${timeline || "14-21 days"}`,
+    `Budget band: ${budgetBand || DEFAULT_BUDGET_BAND}`,
+    `Timeline: ${timeline || DEFAULT_TIMELINE}`,
   ];
 
   const attributionSummary = formatAttributionSummary(attribution);

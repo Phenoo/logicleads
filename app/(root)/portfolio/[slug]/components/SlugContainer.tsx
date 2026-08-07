@@ -5,19 +5,24 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { GiFastArrow } from "react-icons/gi";
+import { PORTFOLIO_FALLBACK_IMAGE } from "../../../../../lib/site";
 
 const SlugContainer = ({ data, items }: any) => {
   const [isLoading, setLoading] = useState(true);
+  const galleryImages = [data?.designImage, data?.planImage, data?.constructImage]
+    .filter(Boolean);
+  const heroImage = data?.mainImage || PORTFOLIO_FALLBACK_IMAGE;
 
   return (
     <div className="max-w-7xl w-full mx-auto p-4 pb-10 ">
       <div className="">
         <div>
           <Image
-            src={data?.mainImage}
+            src={heroImage}
             alt={data?.title}
-            width={600}
-            height={600}
+            width={1600}
+            height={1000}
+            sizes="100vw"
             className={`object-contain rounded-xl w-full h-full hover:opacity-90  transition
                   duration-300 ease-in-out group-hover:opacity-75
                   ${
@@ -76,37 +81,30 @@ const SlugContainer = ({ data, items }: any) => {
           <p className="text-xl">{data?.solution}</p>
         </div>
         <br />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <Image
-              src={data?.designImage}
-              alt={data?.title}
-              width={600}
-              height={600}
-              className={`object-contain rounded-xl w-full h-full hover:opacity-90  transition
-                  duration-300 ease-in-out group-hover:opacity-75
-                 
-                      "scale-100 blur-0 grayscale-0"
-                  `}
-              loading="lazy"
-            />
-          </div>
-          <div>
-            <Image
-              src={data?.planImage}
-              alt={data?.title}
-              width={600}
-              height={600}
-              className={`object-contain rounded-xl w-full h-full hover:opacity-90  transition
-                  duration-300 ease-in-out group-hover:opacity-75
-                 
-                      "scale-100 blur-0 grayscale-0"
-                  `}
-              loading="lazy"
-            />
-          </div>
-        </div>
-        <small className="text-center">Pictures of the project</small>
+        {galleryImages.length > 0 ? (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {galleryImages.map((image: string, index: number) => (
+                <div key={`${image}-${index}`}>
+                  <Image
+                    src={image}
+                    alt={`${data?.title} project gallery image ${index + 1}`}
+                    width={1200}
+                    height={900}
+                    sizes="(min-width: 768px) 45vw, 100vw"
+                    className="h-full w-full rounded-xl object-cover transition duration-300 ease-in-out hover:opacity-90"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+            <small className="text-center">Pictures of the project</small>
+          </>
+        ) : (
+          <small className="text-center">
+            More project visuals can be shared during discovery.
+          </small>
+        )}
         <br />
         <div>
           <h4 className="text-lg md:text-2xl lg:text-4xl font-medium">
@@ -122,18 +120,31 @@ const SlugContainer = ({ data, items }: any) => {
       <h4 className="text-xl md:text-3xl mt-16">View Other Projects</h4>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
         {items.map((item: any, i: any) => {
+          const imageSrc = item?.mainImage || PORTFOLIO_FALLBACK_IMAGE;
+
           return (
             <Link key={i} href={`/portfolio/${item?.slug.current}`}>
               <div className="flex flex-col transition-all hover:scale-95 cursor-pointer gap-4 group project">
-                <div>
-                  <Image
-                    src={item?.mainImage}
-                    alt="project"
-                    width={500}
-                    height={400}
-                    className="rounded-3xl"
-                  />
-                </div>
+                  <div className="overflow-hidden rounded-3xl h-[280px]">
+                    {item?.url ? (
+                      <iframe 
+                        src={item.url}
+                        className="w-full h-full border-0 pointer-events-none rounded-3xl"
+                        title={item?.title || "Project preview"}
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin"
+                      />
+                    ) : (
+                      <Image
+                        src={imageSrc}
+                        alt={item?.title || "Project preview"}
+                        width={1200}
+                        height={900}
+                        sizes="(min-width: 1024px) 40vw, (min-width: 768px) 45vw, 100vw"
+                        className="h-[280px] w-full rounded-3xl object-cover"
+                      />
+                    )}
+                  </div>
                 <div className="">
                   <span className="border-x rounded-3xl border-x-black bg-primary text-white py-2 px-4 text-base">
                     {item?.category}

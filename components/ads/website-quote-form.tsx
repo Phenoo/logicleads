@@ -7,6 +7,11 @@ import { sendAdLead } from "../../actions/sendAdLead";
 import AttributionFields from "../marketing/attribution-fields";
 import WhatsAppCta from "../marketing/whatsapp-cta";
 import { trackLead } from "../../lib/meta-browser";
+import {
+  DEFAULT_BUDGET_BAND_DISPLAY,
+  DEFAULT_TIMELINE,
+  WHATSAPP_NUMBER_DISPLAY,
+} from "../../lib/site";
 
 type SubmittedLead = {
   name: string;
@@ -209,9 +214,11 @@ export default function WebsiteQuoteForm() {
             <option value="" disabled>
               Select your budget
             </option>
-            <option value="₦250k - ₦500k">₦250k - ₦500k</option>
-            <option value="₦500k - ₦1.5m">₦500k - ₦1.5m</option>
-            <option value="₦1.5m+">₦1.5m+</option>
+            <option value="Under £2,000">Under £2,000</option>
+            <option value={DEFAULT_BUDGET_BAND_DISPLAY}>
+              {DEFAULT_BUDGET_BAND_DISPLAY}
+            </option>
+            <option value="£5,000+">£5,000+</option>
           </select>
         </label>
 
@@ -229,7 +236,7 @@ export default function WebsiteQuoteForm() {
               Select your preferred timeline
             </option>
             <option value="ASAP">ASAP</option>
-            <option value="14-21 days">14-21 days</option>
+            <option value={DEFAULT_TIMELINE}>{DEFAULT_TIMELINE}</option>
             <option value="1-2 months">1-2 months</option>
             <option value="Flexible">Flexible</option>
           </select>
@@ -245,7 +252,7 @@ export default function WebsiteQuoteForm() {
           name="phoneNumber"
           required
           maxLength={500}
-          placeholder="+234 703 517 2208"
+          placeholder={WHATSAPP_NUMBER_DISPLAY}
           className="rounded-2xl border border-black/10 bg-[#f7f8fb] px-5 py-4 text-base text-black outline-none transition focus:border-primary"
         />
       </label>

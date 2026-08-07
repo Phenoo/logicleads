@@ -9,6 +9,14 @@ import {
 } from "react-icons/fa6";
 import { TbHexagonLetterLFilled } from "react-icons/tb";
 import WhatsAppCta from "../marketing/whatsapp-cta";
+import {
+  BUSINESS_LOCATION_LABEL,
+  DEFAULT_BUDGET_BAND_DISPLAY,
+  DEFAULT_TIMELINE,
+  PHONE_LINK,
+  SUPPORT_EMAIL,
+  WHATSAPP_NUMBER_DISPLAY,
+} from "../../lib/site";
 
 const Footer = () => {
   return (
@@ -23,9 +31,9 @@ const Footer = () => {
             there
           </div>
           <div>
-            <Link href={"/business-websites"} className="w-fit">
+            <Link href={"/contact"} className="w-fit">
               <button className="button hover:animate-pulse transition-all bg-primary">
-                Get Website Quote
+                Get Quote
               </button>
             </Link>
           </div>
@@ -37,13 +45,14 @@ const Footer = () => {
               <TbHexagonLetterLFilled className="h-8 w-8 text-primary" /> Leads
             </div>
             <p>
-              At Logicleads, we are more than just a service provider; we are
-              your partner in digital success. Let&apos;s work together to
-              create something extraordinary.
+              Logic Leads is a UK-based digital partner for businesses that
+              need stronger websites, clearer positioning, and better lead
+              generation.
             </p>
+            <p className="text-white/70">{BUSINESS_LOCATION_LABEL}</p>
             <div className="mt-4 flex gap-4 items-center">
               <span className="p-4 border border-white cursor-pointer rounded-md  hover:bg-primary hover:border-none text-white transition-all">
-                <a href="mailto:bylogicleads@gmail.com">
+                <a href={`mailto:${SUPPORT_EMAIL}`}>
                   <Mail color="white" className="text-white w-4 h-4" />
                 </a>
               </span>
@@ -69,8 +78,8 @@ const Footer = () => {
               <span className="p-4 border border-white cursor-pointer rounded-md hover:bg-primary hover:border-none text-white transition-all">
                 <WhatsAppCta
                   entryPoint="Footer social CTA"
-                  budgetBand="₦500k - ₦1.5m"
-                  timeline="14-21 days"
+                  budgetBand={DEFAULT_BUDGET_BAND_DISPLAY}
+                  timeline={DEFAULT_TIMELINE}
                   needs="Business website quote"
                   goal="A conversion-focused business website"
                   className="inline-flex"
@@ -119,13 +128,12 @@ const Footer = () => {
             </h4>
             <ul className="flex flex-col gap-4 ">
               <li>
-                <a href="tel:+2347035172208">07035172208</a>
+                <a href={PHONE_LINK}>{WHATSAPP_NUMBER_DISPLAY}</a>
               </li>
               <li>
-                <a href="mailto:bylogicleads@gmail.com">
-                  bylogicleads@gmail.com
-                </a>
+                <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
               </li>
+              <li>{BUSINESS_LOCATION_LABEL}</li>
             </ul>
           </div>{" "}
           <div className="md:col-span-3"></div>

@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { groq } from "next-sanity";
 import { client } from "../sanity/lib/client";
+import { SITE_URL } from "../lib/site";
 
 const query = groq`
   *[_type == "project"] {
@@ -17,55 +18,55 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const postEntries: MetadataRoute.Sitemap = projectSlugs.map(
       (slug: string) => ({
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/portfolio/${slug}`,
+        url: `${SITE_URL}/portfolio/${slug}`,
         lastModified: new Date(),
       })
     );
 
     return [
       {
-        url: "https://www.logicleads.tech",
+        url: SITE_URL,
         lastModified: new Date(),
         priority: 1,
       },
       {
-        url: `https://www.logicleads.tech/about`,
+        url: `${SITE_URL}/about`,
         lastModified: new Date(),
         changeFrequency: "monthly",
         priority: 0.8,
       },
       {
-        url: `https://www.logicleads.tech/portfolio`,
+        url: `${SITE_URL}/portfolio`,
         lastModified: new Date(),
         changeFrequency: "monthly",
         priority: 0.8,
       },
       {
-        url: `https://www.logicleads.tech/services`,
+        url: `${SITE_URL}/services`,
         lastModified: new Date(),
         changeFrequency: "weekly",
         priority: 0.8,
       },
       {
-        url: `https://www.logicleads.tech/contact`,
+        url: `${SITE_URL}/contact`,
         lastModified: new Date(),
         changeFrequency: "weekly",
         priority: 1,
       },
       {
-        url: `https://www.logicleads.tech/business-websites`,
+        url: `${SITE_URL}/business-websites`,
         lastModified: new Date(),
         changeFrequency: "weekly",
         priority: 0.9,
       },
       {
-        url: `https://www.logicleads.tech/privacy-policy`,
+        url: `${SITE_URL}/privacy-policy`,
         lastModified: new Date(),
         changeFrequency: "yearly",
         priority: 0.4,
       },
       {
-        url: `https://www.logicleads.tech/terms-and-conditions`,
+        url: `${SITE_URL}/terms-and-conditions`,
         lastModified: new Date(),
         changeFrequency: "yearly",
         priority: 0.4,

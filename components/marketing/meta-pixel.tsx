@@ -49,6 +49,7 @@ export default function MetaPixel() {
         `}
       </Script>
       <noscript>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           alt=""
           height="1"

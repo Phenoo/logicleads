@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SUPPORT_EMAIL, WHATSAPP_NUMBER_DISPLAY } from "../../../lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -31,12 +32,11 @@ const policySections = [
   {
     title: "Your Rights",
     body:
-      "You can ask us to update or delete the personal information you submitted by contacting bylogicleads@gmail.com. We will handle reasonable privacy requests in line with applicable law.",
+      `You can ask us to update or delete the personal information you submitted by contacting ${SUPPORT_EMAIL}. We will handle reasonable privacy requests in line with applicable law.`,
   },
   {
     title: "Contact",
-    body:
-      "If you have questions about this policy or your data, contact Logic Leads at bylogicleads@gmail.com or +234 703 517 2208.",
+    body: `If you have questions about this policy or your data, contact Logic Leads at ${SUPPORT_EMAIL} or ${WHATSAPP_NUMBER_DISPLAY}.`,
   },
 ];
 

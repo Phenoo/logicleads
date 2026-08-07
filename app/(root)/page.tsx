@@ -65,6 +65,27 @@ export default async function Home() {
       mainImage: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=500",
       url: "https://demuzscuts.online/",
       slug: { current: "demuzscuts" }
+    },
+    {
+      title: "Supermarket.ng",
+      category: "E-commerce",
+      mainImage: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=500",
+      url: "https://supermarket.ng/",
+      slug: { current: "supermarket-ng" }
+    },
+    {
+      title: "Faith Journals",
+      category: "E-commerce",
+      mainImage: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=500",
+      url: "https://faith-journals.com",
+      slug: { current: "faith-journals" }
+    },
+    {
+      title: "Faith Garden",
+      category: "Blog / Resource",
+      mainImage: "https://images.unsplash.com/photo-1466692476877-6a319fbf3b3a?auto=format&fit=crop&q=80&w=500",
+      url: "https://faithgarden.online",
+      slug: { current: "faith-garden" }
     }
   ];
 
@@ -79,7 +100,7 @@ export default async function Home() {
       <TextSLider1 />
       <SectionQuote />
       <Project />
-      <Review posts={posts} />
+      {/* <Review posts={posts} /> */}
       <TextSLider1 />
       <SectionFaq />
       <Contact />

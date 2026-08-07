@@ -1,6 +1,10 @@
 import React from "react";
 import { FaFacebook } from "react-icons/fa6";
 import WhatsAppCta from "./marketing/whatsapp-cta";
+import {
+  DEFAULT_BUDGET_BAND_DISPLAY,
+  DEFAULT_TIMELINE,
+} from "../lib/site";
 
 const Social = () => {
   return (
@@ -35,8 +39,8 @@ const Social = () => {
 
       <WhatsAppCta
         entryPoint="Social WhatsApp CTA"
-        budgetBand="₦500k - ₦1.5m"
-        timeline="14-21 days"
+        budgetBand={DEFAULT_BUDGET_BAND_DISPLAY}
+        timeline={DEFAULT_TIMELINE}
         needs="Business website quote"
         goal="A conversion-focused business website"
         className="socialContainer containerFour"
