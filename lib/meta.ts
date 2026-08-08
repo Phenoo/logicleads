@@ -110,6 +110,7 @@ export async function sendMetaLeadEvent({
           fn: firstName ? [hashValue(firstName.toLowerCase())] : undefined,
           ln: lastName ? [hashValue(lastName.toLowerCase())] : undefined,
           country: [hashValue("gb")],
+          external_id: normalizedEmail ? [hashValue(normalizedEmail)] : undefined,
           fbp: fbpCookie,
           fbc: fbcCookie,
         },
