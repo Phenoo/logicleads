@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { trackPageView } from "../../lib/meta-browser";
 
-const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID || "879729961597585";
+const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID || "2436232723454776";
 
 export default function MetaPixel() {
   const pathname = usePathname();

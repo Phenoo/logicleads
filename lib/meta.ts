@@ -64,7 +64,7 @@ export async function sendMetaLeadEvent({
   const pixelId =
     process.env.META_PIXEL_ID ||
     process.env.NEXT_PUBLIC_META_PIXEL_ID ||
-    "956732605370557";
+    "2436232723454776";
   const accessToken = process.env.META_ACCESS_TOKEN;
 
   if (
@@ -158,7 +158,7 @@ export async function sendMetaCrmLeadEvent({
   const pixelId =
     process.env.META_PIXEL_ID ||
     process.env.NEXT_PUBLIC_META_PIXEL_ID ||
-    "956732605370557";
+    "2436232723454776";
   const accessToken = process.env.META_ACCESS_TOKEN;
 
   if (
