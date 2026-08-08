@@ -10,53 +10,75 @@ import {
 import { getErrorMessage, validateString } from "../lib/utils";
 import { sendMetaLeadEvent } from "../lib/meta";
 
+import ClientConfirmationEmail from "../email/client-confirmation-email";
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendAdLead = async (formData: FormData) => {
   const name = getStringValue(formData.get("name"));
-  const businessType = getStringValue(formData.get("businessType"));
-  const budgetBand = getStringValue(formData.get("budgetBand"));
-  const timeline = getStringValue(formData.get("timeline"));
+  const businessName = getStringValue(formData.get("businessName"));
+  const email = getStringValue(formData.get("email"));
   const phoneNumber = getStringValue(formData.get("phoneNumber"));
+  const projectType =
+    getStringValue(formData.get("projectType")) ||
+    getStringValue(formData.get("businessType"));
+  const businessDescription = getStringValue(
+    formData.get("businessDescription")
+  );
+  const goal = getStringValue(formData.get("goal"));
+  const timeline = getStringValue(formData.get("timeline"));
+  const budgetBand = getStringValue(formData.get("budgetBand"));
   const eventId = getStringValue(formData.get("event_id"));
   const attribution = extractMarketingAttribution(formData);
 
   if (!validateString(name, 500)) {
-    return { error: "Invalid name" };
-  }
-
-  if (!validateString(businessType, 500)) {
-    return { error: "Invalid business type" };
-  }
-
-  if (!validateString(budgetBand, 500)) {
-    return { error: "Invalid budget band" };
-  }
-
-  if (!validateString(timeline, 500)) {
-    return { error: "Invalid timeline" };
+    return { error: "Please enter your full name" };
   }
 
   if (!validateString(phoneNumber, 500)) {
-    return { error: "Invalid phone number" };
+    return { error: "Please enter a valid phone or WhatsApp number" };
   }
 
   let data;
 
   try {
+    // 1. Send notification to agency team
     data = await resend.emails.send({
-      from: "Website Quote Lead <onboarding@resend.dev>",
+      from: "Logic Leads <support@logicleads.info>",
       to: "bylogicleads@gmail.com",
-      subject: `New website quote lead from ${businessType}`,
+      subject: `New Project Enquiry: ${projectType || "General"} (${businessName || name})`,
       react: React.createElement(AdLeadEmail, {
         name,
-        businessType,
-        budgetBand,
-        timeline,
+        businessName,
+        email,
         phoneNumber,
+        projectType,
+        businessType: projectType,
+        businessDescription,
+        goal,
+        budgetBand: budgetBand || "Not sure yet",
+        timeline: timeline || "Flexible",
         attribution,
       }),
     });
+
+    // 2. Send confirmation email directly to the client's email address
+    if (validateString(email, 500)) {
+      try {
+        await resend.emails.send({
+          from: "Logic Leads <support@logicleads.info>",
+          to: email,
+          subject: "We received your project enquiry - Logic Leads",
+          react: React.createElement(ClientConfirmationEmail, {
+            name,
+            projectType,
+            budgetBand,
+          }),
+        });
+      } catch (clientEmailErr) {
+        console.error("Failed to send client confirmation email:", clientEmailErr);
+      }
+    }
   } catch (error: unknown) {
     return {
       error: getErrorMessage(error),
@@ -69,13 +91,15 @@ export const sendAdLead = async (formData: FormData) => {
       sourceUrl: attribution.source_url,
       userData: {
         firstName: name,
+        email: email || undefined,
         phone: phoneNumber,
         fbclid: attribution.fbclid,
       },
       customData: {
-        content_name: "Business Website Landing Page",
-        lead_source: "website_ads_form",
-        business_type: businessType,
+        content_name: "Meta Ads Quote Landing Page",
+        lead_source: "qualified_ads_form",
+        project_type: projectType,
+        business_name: businessName,
         budget_band: budgetBand,
         timeline,
         page_context: attribution.page_context,

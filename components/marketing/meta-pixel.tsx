@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { trackMetaEvent } from "../../lib/meta-browser";
 
-const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID || "879729961597585";
 
 export default function MetaPixel() {
   const pathname = usePathname();

@@ -38,7 +38,10 @@ function normalizePhone(phone?: string) {
   const digitsOnly = phone.replace(/\D/g, "");
 
   if (digitsOnly.length === 11 && digitsOnly.startsWith("0")) {
-    return `234${digitsOnly.slice(1)}`;
+    return `44${digitsOnly.slice(1)}`;
+  }
+  if (digitsOnly.length === 10 && digitsOnly.startsWith("0")) {
+    return `44${digitsOnly.slice(1)}`;
   }
 
   return digitsOnly || undefined;
@@ -59,10 +62,17 @@ export async function sendMetaLeadEvent({
   customData,
 }: MetaLeadEventInput) {
   const pixelId =
-    process.env.META_PIXEL_ID || process.env.NEXT_PUBLIC_META_PIXEL_ID;
+    process.env.META_PIXEL_ID ||
+    process.env.NEXT_PUBLIC_META_PIXEL_ID ||
+    "879729961597585";
   const accessToken = process.env.META_ACCESS_TOKEN;
 
-  if (!pixelId || !accessToken) {
+  if (
+    !pixelId ||
+    !accessToken ||
+    accessToken.includes("your_meta_conversions_api_access_token") ||
+    accessToken.startsWith("your_")
+  ) {
     return { skipped: true };
   }
 

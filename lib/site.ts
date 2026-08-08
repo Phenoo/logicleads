@@ -2,7 +2,7 @@ export const SITE_NAME = "Logic Leads";
 export const SITE_URL = "https://www.logicleads.tech";
 export const SITE_DESCRIPTION =
   "Logic Leads is a UK-based digital agency building conversion-focused websites, digital experiences, and growth-ready brand systems.";
-export const SUPPORT_EMAIL = "bylogicleads@gmail.com";
+export const SUPPORT_EMAIL = "support@logicleads.info";
 export const WHATSAPP_NUMBER_RAW = "447380188114";
 export const WHATSAPP_NUMBER_DISPLAY = "+44 7380 188114";
 export const PHONE_LINK = `tel:+${WHATSAPP_NUMBER_RAW}`;

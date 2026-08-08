@@ -10,6 +10,8 @@ import TextSLider1 from "../../components/textslide";
 import { BalancerProvider } from "../providers/provider";
 import MarketingAttributionTracker from "../../components/marketing/marketing-attribution-tracker";
 import MetaPixel from "../../components/marketing/meta-pixel";
+import GoogleAnalytics from "../../components/marketing/google-analytics";
+import FloatingWhatsApp from "../../components/marketing/floating-whatsapp";
 import SiteSchema from "../../components/marketing/site-schema";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "../../lib/site";
 
@@ -70,6 +72,8 @@ export default function RootLayout({
           <SiteSchema />
           <MarketingAttributionTracker />
           <MetaPixel />
+          <GoogleAnalytics />
+          <FloatingWhatsApp />
           <SmoothScrolling>
             <Navigation />
             <main className="pt-24">{children}</main>

@@ -3,12 +3,24 @@
 declare global {
   interface Window {
     fbq?: (...args: unknown[]) => void;
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
   }
 }
 
 type MetaEventOptions = {
   eventID?: string;
 };
+
+export function trackGA4Event(
+  eventName: string,
+  parameters?: Record<string, unknown>
+) {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") {
+    return;
+  }
+  window.gtag("event", eventName, parameters ?? {});
+}
 
 export function trackMetaEvent(
   eventName: string,
@@ -39,12 +51,36 @@ export function trackLead(
   parameters?: Record<string, unknown>
 ) {
   trackMetaEvent("Lead", parameters, { eventID: eventId });
+  trackGA4Event("generate_lead", parameters);
 }
 
 export function trackViewContent(parameters?: Record<string, unknown>) {
   trackMetaEvent("ViewContent", parameters);
+  trackGA4Event("view_content", parameters);
 }
 
 export function trackWhatsAppClick(parameters?: Record<string, unknown>) {
   trackMetaCustomEvent("WhatsAppClick", parameters);
+  trackGA4Event("whatsapp_click", parameters);
 }
+
+export function trackDiscoveryCallClick(parameters?: Record<string, unknown>) {
+  trackMetaCustomEvent("DiscoveryCallClick", parameters);
+  trackGA4Event("discovery_call_click", parameters);
+}
+
+export function trackLeadFormStart(parameters?: Record<string, unknown>) {
+  trackMetaCustomEvent("LeadFormStart", parameters);
+  trackGA4Event("lead_form_start", parameters);
+}
+
+export function trackPortfolioClick(parameters?: Record<string, unknown>) {
+  trackMetaCustomEvent("PortfolioClick", parameters);
+  trackGA4Event("portfolio_click", parameters);
+}
+
+export function trackPricingView(parameters?: Record<string, unknown>) {
+  trackMetaCustomEvent("PricingView", parameters);
+  trackGA4Event("pricing_view", parameters);
+}
+
