@@ -59,12 +59,24 @@ export function trackViewContent(parameters?: Record<string, unknown>) {
   trackGA4Event("view_content", parameters);
 }
 
+export function trackContact(parameters?: Record<string, unknown>) {
+  trackMetaEvent("Contact", parameters);
+  trackGA4Event("contact", parameters);
+}
+
+export function trackSchedule(parameters?: Record<string, unknown>) {
+  trackMetaEvent("Schedule", parameters);
+  trackGA4Event("schedule", parameters);
+}
+
 export function trackWhatsAppClick(parameters?: Record<string, unknown>) {
+  trackMetaEvent("Contact", parameters);
   trackMetaCustomEvent("WhatsAppClick", parameters);
   trackGA4Event("whatsapp_click", parameters);
 }
 
 export function trackDiscoveryCallClick(parameters?: Record<string, unknown>) {
+  trackMetaEvent("Schedule", parameters);
   trackMetaCustomEvent("DiscoveryCallClick", parameters);
   trackGA4Event("discovery_call_click", parameters);
 }
