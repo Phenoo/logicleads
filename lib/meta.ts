@@ -1,7 +1,7 @@
 "use server";
 
 import { createHash } from "crypto";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 type MetaUserData = {
   email?: string;
@@ -77,9 +77,14 @@ export async function sendMetaLeadEvent({
   }
 
   const requestHeaders = headers();
+  const cookieStore = cookies();
   const clientIpAddress =
     requestHeaders.get("x-forwarded-for")?.split(",")[0]?.trim() || undefined;
   const clientUserAgent = requestHeaders.get("user-agent") || undefined;
+
+  const fbpCookie = cookieStore.get("_fbp")?.value || undefined;
+  const fbcCookie =
+    cookieStore.get("_fbc")?.value || buildFbc(userData?.fbclid);
 
   const normalizedEmail = normalizeEmail(userData?.email);
   const normalizedPhone = normalizePhone(userData?.phone);
@@ -96,7 +101,7 @@ export async function sendMetaLeadEvent({
         event_time: Math.floor(Date.now() / 1000),
         action_source: "website",
         event_id: eventId,
-        event_source_url: sourceUrl,
+        event_source_url: sourceUrl || "https://www.logicleads.info/get-a-quote",
         user_data: {
           client_ip_address: clientIpAddress,
           client_user_agent: clientUserAgent,
@@ -104,7 +109,9 @@ export async function sendMetaLeadEvent({
           ph: normalizedPhone ? [hashValue(normalizedPhone)] : undefined,
           fn: firstName ? [hashValue(firstName.toLowerCase())] : undefined,
           ln: lastName ? [hashValue(lastName.toLowerCase())] : undefined,
-          fbc: buildFbc(userData?.fbclid),
+          country: [hashValue("gb")],
+          fbp: fbpCookie,
+          fbc: fbcCookie,
         },
         custom_data: customData,
       },
