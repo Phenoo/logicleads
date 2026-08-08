@@ -64,7 +64,7 @@ export async function sendMetaLeadEvent({
   const pixelId =
     process.env.META_PIXEL_ID ||
     process.env.NEXT_PUBLIC_META_PIXEL_ID ||
-    "879729961597585";
+    "956732605370557";
   const accessToken = process.env.META_ACCESS_TOKEN;
 
   if (
@@ -135,6 +135,79 @@ export async function sendMetaLeadEvent({
   if (!response.ok) {
     const errorText = await response.text();
     throw new Error(`Meta CAPI request failed: ${errorText}`);
+  }
+
+  return response.json();
+}
+
+type MetaCrmLeadEventInput = {
+  leadId: string | number;
+  email?: string;
+  phone?: string;
+  eventTime?: number;
+  crmName?: string;
+};
+
+export async function sendMetaCrmLeadEvent({
+  leadId,
+  email,
+  phone,
+  eventTime,
+  crmName = "Your CRM",
+}: MetaCrmLeadEventInput) {
+  const pixelId =
+    process.env.META_PIXEL_ID ||
+    process.env.NEXT_PUBLIC_META_PIXEL_ID ||
+    "956732605370557";
+  const accessToken = process.env.META_ACCESS_TOKEN;
+
+  if (
+    !pixelId ||
+    !accessToken ||
+    accessToken.includes("your_meta_conversions_api_access_token") ||
+    accessToken.startsWith("your_")
+  ) {
+    return { skipped: true };
+  }
+
+  const normalizedEmail = normalizeEmail(email);
+  const normalizedPhone = normalizePhone(phone);
+
+  const payload = {
+    data: [
+      {
+        action_source: "system_generated",
+        event_name: "Lead",
+        event_time: eventTime || Math.floor(Date.now() / 1000),
+        custom_data: {
+          event_source: "crm",
+          lead_event_source: crmName,
+        },
+        user_data: {
+          em: normalizedEmail ? [hashValue(normalizedEmail)] : undefined,
+          ph: normalizedPhone ? [hashValue(normalizedPhone)] : undefined,
+          lead_id: leadId,
+        },
+      },
+    ],
+    test_event_code: process.env.META_TEST_EVENT_CODE || undefined,
+  };
+
+  const response = await fetch(
+    `https://graph.facebook.com/v20.0/${pixelId}/events?access_token=${accessToken}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Meta CAPI CRM request failed: ${errorText}`);
   }
 
   return response.json();
