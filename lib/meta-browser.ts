@@ -12,6 +12,10 @@ type MetaEventOptions = {
   eventID?: string;
 };
 
+let lastTrackedUrl: string | null = null;
+let lastViewContentKey: string | null = null;
+let lastViewContentTime: number = 0;
+
 export function trackGA4Event(
   eventName: string,
   parameters?: Record<string, unknown>
@@ -46,6 +50,14 @@ export function trackMetaCustomEvent(
   window.fbq("trackCustom", eventName, parameters ?? {}, options);
 }
 
+export function trackPageView(url: string) {
+  if (lastTrackedUrl === url) {
+    return;
+  }
+  lastTrackedUrl = url;
+  trackMetaEvent("PageView", { page_url: url });
+}
+
 export function trackLead(
   eventId: string,
   parameters?: Record<string, unknown>
@@ -55,6 +67,17 @@ export function trackLead(
 }
 
 export function trackViewContent(parameters?: Record<string, unknown>) {
+  const contentKey = JSON.stringify(parameters || {});
+  const now = Date.now();
+
+  // Prevent duplicate ViewContent events within 2 seconds (e.g. React Strict Mode)
+  if (lastViewContentKey === contentKey && now - lastViewContentTime < 2000) {
+    return;
+  }
+
+  lastViewContentKey = contentKey;
+  lastViewContentTime = now;
+
   trackMetaEvent("ViewContent", parameters);
   trackGA4Event("view_content", parameters);
 }
@@ -70,7 +93,6 @@ export function trackSchedule(parameters?: Record<string, unknown>) {
 }
 
 export function trackWhatsAppClick(parameters?: Record<string, unknown>) {
-  trackMetaEvent("Contact", parameters);
   trackMetaCustomEvent("WhatsAppClick", parameters);
   trackGA4Event("whatsapp_click", parameters);
 }
@@ -95,4 +117,3 @@ export function trackPricingView(parameters?: Record<string, unknown>) {
   trackMetaCustomEvent("PricingView", parameters);
   trackGA4Event("pricing_view", parameters);
 }
-

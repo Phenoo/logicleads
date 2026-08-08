@@ -1,31 +1,23 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { trackMetaEvent } from "../../lib/meta-browser";
+import { trackPageView } from "../../lib/meta-browser";
 
 const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID || "879729961597585";
 
 export default function MetaPixel() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const hasTrackedInitialPage = useRef(false);
 
   useEffect(() => {
     if (!pixelId) {
       return;
     }
 
-    if (!hasTrackedInitialPage.current) {
-      hasTrackedInitialPage.current = true;
-      return;
-    }
-
-    trackMetaEvent("PageView", {
-      path: pathname,
-      search: searchParams.toString(),
-    });
+    const url = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : "");
+    trackPageView(url);
   }, [pathname, searchParams]);
 
   if (!pixelId) {
@@ -45,7 +37,6 @@ export default function MetaPixel() {
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
           fbq('init', '${pixelId}');
-          fbq('track', 'PageView');
         `}
       </Script>
       <noscript>

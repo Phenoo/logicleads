@@ -15,6 +15,7 @@ import {
 
 type SubmittedLead = {
   name: string;
+  email: string;
   businessType: string;
   budgetBand: string;
   timeline: string;
@@ -127,6 +128,7 @@ export default function WebsiteQuoteForm() {
 
         const nextLead = {
           name: String(formData.get("name") || ""),
+          email: String(formData.get("email") || ""),
           businessType: String(formData.get("businessType") || ""),
           budgetBand: String(formData.get("budgetBand") || ""),
           timeline: String(formData.get("timeline") || ""),
@@ -173,6 +175,20 @@ export default function WebsiteQuoteForm() {
             required
             maxLength={500}
             placeholder="Enter your full name"
+            className="rounded-2xl border border-black/10 bg-[#f7f8fb] px-5 py-4 text-base text-black outline-none transition focus:border-primary"
+          />
+        </label>
+
+        <label className="flex flex-col gap-2">
+          <span className="text-sm font-semibold uppercase tracking-[0.2em] text-black/60">
+            Email Address
+          </span>
+          <input
+            type="email"
+            name="email"
+            required
+            maxLength={500}
+            placeholder="your@email.com"
             className="rounded-2xl border border-black/10 bg-[#f7f8fb] px-5 py-4 text-base text-black outline-none transition focus:border-primary"
           />
         </label>
